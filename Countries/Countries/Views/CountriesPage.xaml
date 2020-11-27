@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="Countries.Views.CountriesPage"
+             Title="{Binding Title}"
+             BackgroundColor="#FFFDEA"
+             xmlns:ffSvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+             xmlns:ffTransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations" >
+
+
+    <StackLayout Padding="5">
+        <SearchBar SearchCommand="{Binding SearchCommand}" IsVisible="{Binding IsVisible}" Text="{Binding Search}" TextColor="Black" Placeholder="Search..."/>
+        <ActivityIndicator IsRunning="{Binding IsRunning}" IsVisible="{Binding ActivityIsRunning}" Color="Red" Margin="0, 250, 0, 0"></ActivityIndicator>
+        <CollectionView  ItemsSource="{Binding Countries}">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical"/>
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="25, 0, 0, 0">
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding SelectCountryCommand}"/>
+                        </Grid.GestureRecognizers>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" />   
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="auto" />
+                        </Grid.ColumnDefinitions>
+                        <ffSvg:SvgCachedImage Grid.Column="0" Aspect="Fill" Source="{Binding Flag}" CacheDuration= "50" Margin="5" RetryCount= "3" RetryDelay= "600" WidthRequest="60" HeightRequest="40">
+                            <ffSvg:SvgCachedImage.Transformations>
+                                <ffTransformations:CircleTransformation />
+                            </ffSvg:SvgCachedImage.Transformations>
+                        </ffSvg:SvgCachedImage>
+                        <StackLayout Grid.Column="1"
+                                     VerticalOptions="Center">
+                            <Label Text="{Binding Name}" 
+                                   FontAttributes="Italic,Bold"
+                                   FontSize="Small"
+                                   TextColor="Black"
+                                   LineBreakMode="TailTruncation" />
+                            
+                        </StackLayout>
+                        <Image Grid.Column="2" 
+                               Source="ic_more_vert"/>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </StackLayout>
+</ContentPage>

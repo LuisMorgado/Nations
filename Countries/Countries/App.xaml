@@ -3,9 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
              x:Class="Countries.App">
-  <Application.Resources>
+    <Application.Resources>
 
-    <!-- Application resource dictionary -->
+        <!-- Application resource dictionary -->
+        <ResourceDictionary>
+            <x:String x:Key="UrlAPI">http://restcountries.eu</x:String>
+            <Style TargetType="NavigationPage">
+                <Setter Property="BarBackgroundColor" Value="#411F16" />
+                <Setter Property="BarTextColor" Value="Color.White" />
+            </Style>
+        </ResourceDictionary>
 
-  </Application.Resources>
+    </Application.Resources>
 </prism:PrismApplication>
